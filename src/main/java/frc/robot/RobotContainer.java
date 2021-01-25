@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -18,7 +20,10 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.commands.DriveWithJoystick;
+import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveStraight;
 import frc.robot.commands.ResetEncoder;
 import frc.robot.subsystems.DriveTrain;
@@ -48,6 +53,11 @@ public class RobotContainer {
   private static Encoder leftEnc;
   private static Encoder rightEnc;
 
+  private static Pose2d start;
+  private static Pose2d end;
+  private static ArrayList<Translation2d> waypoints = new ArrayList<Translation2d>();
+  private static MotionProfile motionProfile;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -70,6 +80,13 @@ public class RobotContainer {
     leftEnc.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
     rightEnc = new Encoder(Constants.RIGHT_ENC_PORT1, Constants.RIGHT_ENC_PORT2);
     rightEnc.setDistancePerPulse(Constants.DISTANCE_PER_PULSE);
+
+     //creating a profile
+    //COUNTER CLOCKWISE is POSITIVE, CLOCKWISE is NEGATIVE
+    start = new Pose2d(Constants.startX, Constants.startY, Constants.startRotation);
+    end = new Pose2d(Constants.endX, Constants.endY, Constants.endRotation);
+    waypoints.add(Constants.testWaypoint);
+    motionProfile = new MotionProfile(start, end, waypoints);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -99,7 +116,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return motionProfile;
   }
 
   public static Joystick getJoystick() {return joy;}
