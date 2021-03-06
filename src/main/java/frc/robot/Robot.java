@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    // SmartDashboard.putNumber("Yaw", m_robotContainer.getNavX().getYaw());
+    SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
     // SmartDashboard.putNumber("Encoder", m_robotContainer.getEncLeft().getDistance());
     // SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
     // SmartDashboard.putNumber("Average distance", m_robotContainer.getDriveTrain().getAvgDistance());
