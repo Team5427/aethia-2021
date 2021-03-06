@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -33,35 +34,45 @@ public final class Constants
     public static final int RIGHT_ENC_PORT2 = 2;
 
     
-    public static final double DRIVETRAIN_WHEEL_DIAMETER = .1524;
-    public static final double DISTANCE_PER_PULSE = (Math.PI * DRIVETRAIN_WHEEL_DIAMETER/1440)/3.68;
+    public static final double DRIVETRAIN_WHEEL_DIAMETER = 0.1524; //in meters
+    public static final double DISTANCE_PER_PULSE = (Math.PI * DRIVETRAIN_WHEEL_DIAMETER/256)/12.63;
 
-    public static final double MAX_VELOCITY = 0;
-    public static final double MAX_ACCELERATION = 0;
-
+    /************************* MOTION PROFILING **********************/
+    public static final double MAX_VELOCITY = Units.inchesToMeters(101.831243);
+    public static final double MAX_TIME = 2.31509296;
+    public static final double MAX_ACCELERATION = MAX_VELOCITY / MAX_TIME;
+    // (% Voltage [-1,1])/(Speed in meters per second) [basically we have to measure this]
     public static final double KV = 1/MAX_VELOCITY;
+
+    //influence of acceleration on velocity, just a bias which can be further tested.
     public static final double KA = 0;
 
-    public static final double KP_left = 0;
+    public static final double KP_left = 0.003;
     public static final double KI_left = 0;
     public static final double KD_left = 0;
 
-    public static final double KP_right = 0;
+    public static final double KP_right = 0.003;
     public static final double KI_right = 0;
     public static final double KD_right = 0;
 
     public static final double K_THETA_P = 0;
     public static final double K_THETA_D = 0;
 
-     /************************* MOTION PROFILING **********************/
-     public static final double startX = 0;
-     public static final double startY = 0;
-     public static final Rotation2d startRotation = new Rotation2d(0);
- 
-     public static final Translation2d testWaypoint = new Translation2d(0, 0);
- 
-     public static final double endX = 0;
-     public static final double endY = 0;
-     public static final Rotation2d endRotation = new Rotation2d(0);
+    //in inches
+
+    public static final double startX = 0;
+    public static final double startY = 0;
+    public static final Rotation2d startRotation = new Rotation2d(0);
+
+    // public static final ArrayList<Translation2d> waypoints = new ArrayList<>();
+    // waypoints.add(new Translation2d(0, 60));
+    // waypoints.add(new Translation2d(30, 60));
+    // waypoints.add(new Translation2d(-90, 30));
+
+    // public static final Translation2d testWaypoint = new Translation2d(0, 1);
+
+    public static final double endX = 0;
+    public static final double endY = -60;
+    public static final Rotation2d endRotation = new Rotation2d(Units.degreesToRadians(0));
  
 }

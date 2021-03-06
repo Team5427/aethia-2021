@@ -7,11 +7,16 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ResetEncoder;
+import frc.robot.commands.MotionProfile;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,7 +38,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    new ResetEncoder();
   }
 
   /**
@@ -50,9 +54,12 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Yaw", m_robotContainer.getNavX().getYaw());
-    SmartDashboard.putNumber("Encoder", m_robotContainer.getEncLeft().getDistance());
-    SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
+    // SmartDashboard.putNumber("Yaw", m_robotContainer.getNavX().getYaw());
+    // SmartDashboard.putNumber("Encoder", m_robotContainer.getEncLeft().getDistance());
+    // SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
+    // SmartDashboard.putNumber("Average distance", m_robotContainer.getDriveTrain().getAvgDistance());
+    SmartDashboard.putNumber("Distance", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
+
 
   }
 
@@ -71,11 +78,19 @@ public class Robot extends TimedRobot {
    * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
    */
   @Override
-  public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+  public void autonomousInit() 
+  {
+    Pose2d start;
+    Pose2d end;
+    ArrayList<Translation2d> waypoints = new ArrayList<Translation2d>();
+    start = new Pose2d(Units.inchesToMeters(Constants.startX), Units.inchesToMeters(Constants.startY), Constants.startRotation);
+    end = new Pose2d(Units.inchesToMeters(Constants.endX), Units.inchesToMeters(Constants.endY), Constants.endRotation);
+    MotionProfile motionProfile = new MotionProfile(start, end, waypoints);
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
+    m_autonomousCommand = motionProfile;
+
+    if(m_autonomousCommand != null)
+    {
       m_autonomousCommand.schedule();
     }
   }

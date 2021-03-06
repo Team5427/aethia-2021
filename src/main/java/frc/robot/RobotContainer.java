@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveStraight;
-import frc.robot.commands.ResetEncoder;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -83,10 +82,10 @@ public class RobotContainer {
 
      //creating a profile
     //COUNTER CLOCKWISE is POSITIVE, CLOCKWISE is NEGATIVE
-    start = new Pose2d(Constants.startX, Constants.startY, Constants.startRotation);
-    end = new Pose2d(Constants.endX, Constants.endY, Constants.endRotation);
-    waypoints.add(Constants.testWaypoint);
-    motionProfile = new MotionProfile(start, end, waypoints);
+    // start = new Pose2d(Constants.startX, Constants.startY, Constants.startRotation);
+    // end = new Pose2d(Constants.endX, Constants.endY, Constants.endRotation);
+    // waypoints.add(Constants.testWaypoint);
+    // motionProfile = new MotionProfile(start, end, waypoints);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -102,11 +101,9 @@ public class RobotContainer {
   {
     joy = new Joystick(0);
 
-    moveStraightPID = new JoystickButton(joy, 7);
-    reset = new JoystickButton(joy, 8);
+    moveStraightPID = new JoystickButton(joy, 11);
 
     moveStraightPID.whenPressed(new MoveStraight(3));
-    reset.whenPressed(new ResetEncoder());
   }
 
   /**
@@ -121,7 +118,7 @@ public class RobotContainer {
 
   public static Joystick getJoystick() {return joy;}
   public static DriveTrain getDriveTrain() {return driveTrain;}
-  public static AHRS getNavX() {return navX;}
+  public static AHRS getAHRS() {return navX;}
   public static Encoder getEncLeft() {return leftEnc;}
   public static Encoder getEncRight() {return rightEnc;}
 }
