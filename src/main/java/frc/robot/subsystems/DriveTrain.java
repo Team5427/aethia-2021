@@ -33,7 +33,7 @@ public class DriveTrain extends SubsystemBase
 
     public void takeJoystickInputs(Joystick joy)
     {
-        driveBase.arcadeDrive(joy.getY(), -joy.getZ());
+        driveBase.arcadeDrive(-joy.getY(), -joy.getZ() * 0.75);
     }
 
     public double getAvgDistance()

@@ -70,6 +70,7 @@ public class RobotContainer {
     right = new SpeedControllerGroup(rightTop, rightBottom);
 
     drive = new DifferentialDrive(left, right);
+    drive.setSafetyEnabled(false);
     driveTrain = new DriveTrain(left, right, drive);
     driveTrain.setDefaultCommand(new DriveWithJoystick());
 

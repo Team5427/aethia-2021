@@ -35,11 +35,16 @@ public final class Constants
 
     
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 0.1524; //in meters
-    public static final double DISTANCE_PER_PULSE = (Math.PI * DRIVETRAIN_WHEEL_DIAMETER/256)/12.63;
+    public static final double DISTANCE_PER_PULSE = (Math.PI * DRIVETRAIN_WHEEL_DIAMETER/256)/12.91;
 
     /************************* MOTION PROFILING **********************/
-    public static final double MAX_VELOCITY = Units.inchesToMeters(101.831243);
-    public static final double MAX_TIME = 2.31509296;
+    public static final double MAX_VELOCITY = Units.inchesToMeters(105.967667);
+    //104.33596297676506: 2.176431000000001
+    //106.21048405472158: 1.0557599999999994
+    //107.358148028799: 2.155234
+    //105.967667: 1.795808
+
+    public static final double MAX_TIME = 1.795808;
     public static final double MAX_ACCELERATION = MAX_VELOCITY / MAX_TIME;
     // (% Voltage [-1,1])/(Speed in meters per second) [basically we have to measure this]
     public static final double KV = 1/MAX_VELOCITY;

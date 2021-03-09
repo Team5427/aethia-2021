@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
@@ -52,7 +53,7 @@ public class MoveStraight extends CommandBase {
       maxTime = timediff;
     }
     System.out.println(RobotContainer.getDriveTrain().getAvgRate()+ ": "+ timediff);
-    driveTrain.tankDrive(-1.0, -1.0);
+    driveTrain.tankDrive(1.0, 1.0);
   }
 
   // Called once the command ends or is interrupted.
@@ -60,7 +61,8 @@ public class MoveStraight extends CommandBase {
   public void end(boolean interrupted)
   {
     driveTrain.stop();
-    System.out.println(maxVelocity+ ": "+ maxTime);
+    System.out.println(Units.metersToInches(maxVelocity)+ ": "+ maxTime);
+    //109.65532201357688: 2.4166060000000016
   }
 
   // Returns true when the command should end.
