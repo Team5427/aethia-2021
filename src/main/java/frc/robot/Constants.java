@@ -52,13 +52,13 @@ public final class Constants
     //influence of acceleration on velocity, just a bias which can be further tested.
     public static final double KA = 0;
 
-    public static final double KP_left = 0.003;
-    public static final double KI_left = 0;
-    public static final double KD_left = 0;
+    public static final double KP_left = 0.18;
+    public static final double KI_left = 0.006;
+    public static final double KD_left = 0.025;
 
-    public static final double KP_right = 0.003;
-    public static final double KI_right = 0;
-    public static final double KD_right = 0;
+    public static final double KP_right = 0.172;
+    public static final double KI_right = 0.006;
+    public static final double KD_right = 0.025;
 
     public static final double K_THETA_P = 0;
     public static final double K_THETA_D = 0;
@@ -77,7 +77,7 @@ public final class Constants
     // public static final Translation2d testWaypoint = new Translation2d(0, 1);
 
     public static final double endX = 0;
-    public static final double endY = -60;
+    public static final double endY = -120;
     public static final Rotation2d endRotation = new Rotation2d(Units.degreesToRadians(0));
  
 }
