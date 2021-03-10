@@ -20,6 +20,16 @@ public class DriveTrain extends SubsystemBase
         this.driveBase = driveBase;
     }
 
+    public SpeedControllerGroup getLeft()
+    {
+        return left;
+    }
+
+    public SpeedControllerGroup getRight()
+    {
+        return right;
+    }
+
     public void tankDrive(double leftSpeed, double rightSpeed)
     {
         driveBase.tankDrive(leftSpeed, rightSpeed);

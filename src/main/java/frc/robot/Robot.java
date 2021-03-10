@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MotionProfile;
+import frc.robot.commands.MoveStraightPID;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -80,14 +81,19 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() 
   {
-    Pose2d start;
-    Pose2d end;
-    ArrayList<Translation2d> waypoints = new ArrayList<Translation2d>();
-    start = new Pose2d(Units.inchesToMeters(Constants.startX), Units.inchesToMeters(Constants.startY), Constants.startRotation);
-    end = new Pose2d(Units.inchesToMeters(Constants.endX), Units.inchesToMeters(Constants.endY), Constants.endRotation);
-    MotionProfile motionProfile = new MotionProfile(start, end, waypoints);
+    RobotContainer.getAHRS().reset();
+    RobotContainer.getEncLeft().reset();
+    RobotContainer.getEncRight().reset();
+    // Pose2d start;
+    // Pose2d end;
+    // ArrayList<Translation2d> waypoints = new ArrayList<Translation2d>();
+    // start = new Pose2d(Units.inchesToMeters(Constants.startX), Units.inchesToMeters(Constants.startY), Constants.startRotation);
+    // end = new Pose2d(Units.inchesToMeters(Constants.endX), Units.inchesToMeters(Constants.endY), Constants.endRotation);
+    // MotionProfile motionProfile = new MotionProfile(start, end, waypoints);
 
-    m_autonomousCommand = motionProfile;
+    MoveStraightPID moveStraightPID = new MoveStraightPID();
+
+    m_autonomousCommand = moveStraightPID;
 
     if(m_autonomousCommand != null)
     {
