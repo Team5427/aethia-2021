@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MotionProfile;
+import frc.robot.commands.MoveDistance;
 import frc.robot.commands.MoveStraightPID;
 import frc.robot.subsystems.DriveTrain;
 
@@ -100,14 +101,16 @@ public class Robot extends TimedRobot {
     // end = new Pose2d(Units.inchesToMeters(Constants.endX), Units.inchesToMeters(Constants.endY), Constants.endRotation);
     // MotionProfile motionProfile = new MotionProfile(start, end, waypoints);
 
-    // MoveStraightPID moveStraightPID = new MoveStraightPID();
+    // MoveDistance moveDistance = new MoveDistance(60);
 
-    // m_autonomousCommand = moveStraightPID;
+    MoveStraightPID moveStraightPID = new MoveStraightPID();
 
-    // if(m_autonomousCommand != null)
-    // {
-    //   m_autonomousCommand.schedule();
-    // }
+    m_autonomousCommand = moveStraightPID;
+
+    if(m_autonomousCommand != null)
+    {
+      m_autonomousCommand.schedule();
+    }
 
   }
 

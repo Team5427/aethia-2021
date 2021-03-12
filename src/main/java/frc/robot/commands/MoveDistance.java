@@ -6,31 +6,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-
-public class MoveStraightPID extends PIDCommand {
-  /** Creates a new MoveStraightPID. */
+public class MoveDistance extends PIDCommand {
+  /** Creates a new MoveDistance. */
 
   private double startTime;
 
-  public MoveStraightPID() {
+  public MoveDistance(double setpoint) {
     super(
         // The controller that the command will use
-        new PIDController(0.12, 0, 0),
+        new PIDController(0.05, 0, 0),
         // This should return the measurement
-        () -> RobotContainer.getAHRS().getYaw(),
+        () -> Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()),
         // This should return the setpoint (can also be a constant)
-        () -> 0,
+        () -> setpoint,
         // This uses the output
         output -> {
           // Use the output here
-          RobotContainer.getDriveTrain().rampLeft(0.4);;
-          RobotContainer.getDriveTrain().getRight().set(output);
+          RobotContainer.getDriveTrain().rampLeft(-output);
+          RobotContainer.getDriveTrain().rampRight(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
