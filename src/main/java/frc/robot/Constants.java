@@ -23,10 +23,13 @@ import edu.wpi.first.wpilibj.util.Units;
  */
 public final class Constants 
 {
-    public static final int LEFTTOP = 8;
-    public static final int RIGHTTOP = 11;
-    public static final int LEFTBOTTOM = 7;
-    public static final int RIGHTBOTTOM = 10;
+    public static final int LEFT_TOP_MOTOR = 10;
+
+	public static final int LEFT_BOTTOM_MOTOR = 11;
+
+	public static final int RIGHT_TOP_MOTOR = 7;
+
+	public static final int RIGHT_BOTTOM_MOTOR = 8;
 
     public static final int LEFT_ENC_PORT1 = 0;
     public static final int RIGHT_ENC_PORT1 = 3;

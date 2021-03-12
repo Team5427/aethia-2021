@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveStraightPID;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -39,6 +40,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    RobotContainer.getAHRS().reset();
+    RobotContainer.getEncLeft().reset();
+    RobotContainer.getEncRight().reset();
   }
 
   /**
@@ -56,6 +60,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
+    SmartDashboard.putNumber("angle", RobotContainer.getAHRS().getYaw());
     // SmartDashboard.putNumber("Encoder", m_robotContainer.getEncLeft().getDistance());
     // SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
     // SmartDashboard.putNumber("Average distance", m_robotContainer.getDriveTrain().getAvgDistance());
@@ -84,6 +89,10 @@ public class Robot extends TimedRobot {
     RobotContainer.getAHRS().reset();
     RobotContainer.getEncLeft().reset();
     RobotContainer.getEncRight().reset();
+
+    DriveTrain.leftSpeed = 0;
+    DriveTrain.rightSpeed = 0;
+    
     // Pose2d start;
     // Pose2d end;
     // ArrayList<Translation2d> waypoints = new ArrayList<Translation2d>();
@@ -91,14 +100,15 @@ public class Robot extends TimedRobot {
     // end = new Pose2d(Units.inchesToMeters(Constants.endX), Units.inchesToMeters(Constants.endY), Constants.endRotation);
     // MotionProfile motionProfile = new MotionProfile(start, end, waypoints);
 
-    MoveStraightPID moveStraightPID = new MoveStraightPID();
+    // MoveStraightPID moveStraightPID = new MoveStraightPID();
 
-    m_autonomousCommand = moveStraightPID;
+    // m_autonomousCommand = moveStraightPID;
 
-    if(m_autonomousCommand != null)
-    {
-      m_autonomousCommand.schedule();
-    }
+    // if(m_autonomousCommand != null)
+    // {
+    //   m_autonomousCommand.schedule();
+    // }
+
   }
 
   /**
@@ -106,6 +116,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    RobotContainer.getDriveTrain().rampLeft(-0.4);
+    
   }
 
   @Override

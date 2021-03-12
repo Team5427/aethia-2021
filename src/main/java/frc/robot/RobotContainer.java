@@ -61,10 +61,10 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    leftTop = new WPI_VictorSPX(Constants.LEFTTOP);
-    leftBottom = new WPI_VictorSPX(Constants.LEFTBOTTOM);
-    rightTop = new WPI_VictorSPX(Constants.RIGHTTOP);
-    rightBottom = new WPI_VictorSPX(Constants.RIGHTBOTTOM);
+    leftTop = new WPI_VictorSPX(Constants.LEFT_TOP_MOTOR);
+    leftBottom = new WPI_VictorSPX(Constants.LEFT_BOTTOM_MOTOR);
+    rightTop = new WPI_VictorSPX(Constants.RIGHT_TOP_MOTOR);
+    rightBottom = new WPI_VictorSPX(Constants.RIGHT_BOTTOM_MOTOR);
 
     left = new SpeedControllerGroup(leftTop, leftBottom);
     right = new SpeedControllerGroup(rightTop, rightBottom);
@@ -72,7 +72,7 @@ public class RobotContainer {
     drive = new DifferentialDrive(left, right);
     drive.setSafetyEnabled(false);
     driveTrain = new DriveTrain(left, right, drive);
-    driveTrain.setDefaultCommand(new DriveWithJoystick());
+    // driveTrain.setDefaultCommand(new DriveWithJoystick());
 
     navX = new AHRS(SPI.Port.kMXP);
 

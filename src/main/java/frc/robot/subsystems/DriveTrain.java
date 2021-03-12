@@ -11,6 +11,8 @@ public class DriveTrain extends SubsystemBase
 {
     private SpeedControllerGroup left, right;
 
+    public static double rightSpeed, leftSpeed = 0;
+
     private DifferentialDrive driveBase;
 
     public DriveTrain(SpeedControllerGroup left, SpeedControllerGroup right, DifferentialDrive driveBase)
@@ -33,6 +35,34 @@ public class DriveTrain extends SubsystemBase
     public void tankDrive(double leftSpeed, double rightSpeed)
     {
         driveBase.tankDrive(leftSpeed, rightSpeed);
+    }
+
+    public void rampLeft(double speed)
+    {
+        left.set(-leftSpeed);
+
+        if(leftSpeed >= Math.abs(speed))
+        {
+            
+        }
+        else
+        {
+            leftSpeed += 0.01;
+        }
+    }
+
+    public void rampRight(double speed)
+    {
+        right.set(rightSpeed);
+
+        if(rightSpeed >= Math.abs(speed))
+        {
+            
+        }
+        else
+        {
+            rightSpeed += 0.01;
+        }
     }
 
     public void stop()
