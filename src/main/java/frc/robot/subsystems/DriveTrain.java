@@ -39,7 +39,8 @@ public class DriveTrain extends SubsystemBase
 
     public void rampLeft(double speed)
     {
-        left.set(-leftSpeed);
+        int multiplier = (speed < 0)? 1: -1;
+        left.set((-leftSpeed) * multiplier);
 
         if(leftSpeed >= Math.abs(speed))
         {
@@ -47,13 +48,14 @@ public class DriveTrain extends SubsystemBase
         }
         else
         {
-            leftSpeed += 0.01;
+            leftSpeed += 0.0035;
         }
     }
 
     public void rampRight(double speed)
     {
-        right.set(rightSpeed);
+        int multiplier = (speed < 0)? -1: 1;
+        left.set((rightSpeed) * multiplier);
 
         if(rightSpeed >= Math.abs(speed))
         {
@@ -61,7 +63,7 @@ public class DriveTrain extends SubsystemBase
         }
         else
         {
-            rightSpeed += 0.01;
+            rightSpeed += 0.0035;
         }
     }
 

@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveDistance;
 import frc.robot.commands.MoveStraightPID;
+import frc.robot.commands.PointTurn;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -66,6 +67,8 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
     // SmartDashboard.putNumber("Average distance", m_robotContainer.getDriveTrain().getAvgDistance());
     SmartDashboard.putNumber("Distance", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
+    SmartDashboard.putNumber("dist", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
+
 
 
   }
@@ -103,14 +106,17 @@ public class Robot extends TimedRobot {
 
     // MoveDistance moveDistance = new MoveDistance(60);
 
-    MoveStraightPID moveStraightPID = new MoveStraightPID();
+    // MoveStraightPID moveStraightPID = new MoveStraightPID();
 
-    m_autonomousCommand = moveStraightPID;
+    PointTurn pointTurn = new PointTurn(80);
+
+    m_autonomousCommand = pointTurn;
 
     if(m_autonomousCommand != null)
     {
       m_autonomousCommand.schedule();
     }
+
 
   }
 
@@ -119,7 +125,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    RobotContainer.getDriveTrain().rampLeft(-0.4);
+    // RobotContainer.getDriveTrain().rampRight(-0.4);
+    // RobotContainer.getDriveTrain().rampLeft(0.4);
+    // System.out.println("yuhhhhh");
+    // RobotContainer.getDriveTrain().rampLeft(-0.5);
     
   }
 

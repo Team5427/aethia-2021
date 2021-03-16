@@ -21,7 +21,7 @@ public class MoveDistance extends PIDCommand {
   public MoveDistance(double setpoint) {
     super(
         // The controller that the command will use
-        new PIDController(0.05, 0, 0),
+        new PIDController(0.5, 0, 0),
         // This should return the measurement
         () -> Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()),
         // This should return the setpoint (can also be a constant)
@@ -40,6 +40,8 @@ public class MoveDistance extends PIDCommand {
   public void initialize()
   {
     startTime = Timer.getFPGATimestamp();
+    RobotContainer.getEncLeft().reset();
+    RobotContainer.getEncRight().reset();
     super.initialize();
   }
 
@@ -47,6 +49,6 @@ public class MoveDistance extends PIDCommand {
   @Override
   public boolean isFinished() 
   {
-    return Timer.getFPGATimestamp() - startTime >= 10;
+    return getController().atSetpoint();
   }
 }

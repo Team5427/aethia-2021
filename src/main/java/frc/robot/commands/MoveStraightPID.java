@@ -21,7 +21,7 @@ public class MoveStraightPID extends PIDCommand {
   public MoveStraightPID() {
     super(
         // The controller that the command will use
-        new PIDController(0.12, 0, 0),
+        new PIDController(0.155, 0.095, 0.005),
         // This should return the measurement
         () -> RobotContainer.getAHRS().getYaw(),
         // This should return the setpoint (can also be a constant)
@@ -29,7 +29,7 @@ public class MoveStraightPID extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          RobotContainer.getDriveTrain().rampLeft(0.4);;
+          RobotContainer.getDriveTrain().rampLeft(-0.4);
           RobotContainer.getDriveTrain().getRight().set(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
