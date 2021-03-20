@@ -2,32 +2,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.RobotContainer;
 
-public class Wait extends CommandBase
+public class Arc extends CommandBase
 {
+
+    private double speed, angle;
     private double startTime;
     private double time;
 
-    public Wait(double time)
+    public Arc(double speed, double angle, double time)
     {
-        startTime = 0;
+        addRequirements(RobotContainer.getDriveTrain());
+        this.speed = speed;
+        this.angle = angle;
         this.time = time;
     }
 
     @Override
     public void initialize()
     {
+        RobotContainer.getDriveTrain().getDriveBase().arcadeDrive(speed, angle);
         startTime = Timer.getFPGATimestamp();
-        DriveTrain.arcadeSpeed = 0;
-        DriveTrain.leftSpeed = 0;
-        DriveTrain.rightSpeed = 0;
     }
 
     @Override
     public void execute()
     {
-
+        RobotContainer.getDriveTrain().getDriveBase().arcadeDrive(speed, angle);
     }
 
     @Override
@@ -39,8 +41,9 @@ public class Wait extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        startTime = Timer.getFPGATimestamp();
-        time = 0;
+        RobotContainer.getDriveTrain().stop();
     }
+
+
     
 }

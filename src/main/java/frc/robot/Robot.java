@@ -20,6 +20,7 @@ import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveDistance;
 import frc.robot.commands.MoveStraightPID;
 import frc.robot.commands.PointTurn;
+import frc.robot.commands.Slalom;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -96,6 +97,7 @@ public class Robot extends TimedRobot {
 
     DriveTrain.leftSpeed = 0;
     DriveTrain.rightSpeed = 0;
+    DriveTrain.arcadeSpeed = 0;
     
     // Pose2d start;
     // Pose2d end;
@@ -108,14 +110,17 @@ public class Robot extends TimedRobot {
 
     // MoveStraightPID moveStraightPID = new MoveStraightPID();
 
-    PointTurn pointTurn = new PointTurn(80);
-
-    m_autonomousCommand = pointTurn;
+    Slalom slalom = new Slalom();
+    
+    m_autonomousCommand = slalom;
 
     if(m_autonomousCommand != null)
     {
       m_autonomousCommand.schedule();
     }
+
+    // RobotContainer.getDriveTrain().rampArcade(0.3, -0.2);
+    // RobotContainer.getDriveTrain().rampRight(0.3);
 
 
   }
@@ -124,12 +129,9 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
-  public void autonomousPeriodic() {
-    // RobotContainer.getDriveTrain().rampRight(-0.4);
-    // RobotContainer.getDriveTrain().rampLeft(0.4);
-    // System.out.println("yuhhhhh");
-    // RobotContainer.getDriveTrain().rampLeft(-0.5);
-    
+  public void autonomousPeriodic() 
+  {
+    // RobotContainer.getDriveTrain().rampArcade(-0.7, 0.4);
   }
 
   @Override

@@ -17,8 +17,9 @@ public class MoveStraightPID extends PIDCommand {
   /** Creates a new MoveStraightPID. */
 
   private double startTime;
+  private double time;
 
-  public MoveStraightPID() {
+  public MoveStraightPID(double time) {
     super(
         // The controller that the command will use
         new PIDController(0.155, 0.095, 0.005),
@@ -33,13 +34,16 @@ public class MoveStraightPID extends PIDCommand {
           RobotContainer.getDriveTrain().getRight().set(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.getDriveTrain());
     // Configure additional PID options by calling `getController` here.
+    this.time = time;
   }
 
   @Override
   public void initialize()
   {
     startTime = Timer.getFPGATimestamp();
+    RobotContainer.getAHRS().reset();
     super.initialize();
   }
 
@@ -47,6 +51,12 @@ public class MoveStraightPID extends PIDCommand {
   @Override
   public boolean isFinished() 
   {
-    return Timer.getFPGATimestamp() - startTime >= 10;
+    return Timer.getFPGATimestamp() - startTime >= time;
+  }
+
+  @Override
+  public void end(boolean interrupted)
+  {
+    RobotContainer.getDriveTrain().stop();
   }
 }
