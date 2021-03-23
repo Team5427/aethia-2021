@@ -22,7 +22,10 @@ public class MoveStraightPID extends PIDCommand {
   public MoveStraightPID(double time) {
     super(
         // The controller that the command will use
-        new PIDController(0.155, 0.095, 0.005),
+        new PIDController(0.16, 0.095, 0.005),
+        //0.155
+        //0.095
+        //0.005
         // This should return the measurement
         () -> RobotContainer.getAHRS().getYaw(),
         // This should return the setpoint (can also be a constant)
