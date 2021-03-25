@@ -82,5 +82,7 @@ public final class Constants
     public static final double endX = 0;
     public static final double endY = -120;
     public static final Rotation2d endRotation = new Rotation2d(Units.degreesToRadians(0));
+
+    public static final double SLALOM_SPEED = 0.7;
  
 }
