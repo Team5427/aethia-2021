@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
@@ -55,6 +56,7 @@ public class MoveStraightPID extends PIDCommand {
   @Override
   public boolean isFinished() 
   {
+    SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
     return Timer.getFPGATimestamp() - startTime >= time;
   }
 
@@ -64,5 +66,6 @@ public class MoveStraightPID extends PIDCommand {
     RobotContainer.getDriveTrain().stop();
     DriveTrain.leftSpeed = 0;
     DriveTrain.rightSpeed = 0;
+    SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
   }
 }

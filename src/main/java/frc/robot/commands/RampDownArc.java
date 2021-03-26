@@ -39,7 +39,6 @@ public class RampDownArc extends CommandBase
     @Override
     public boolean isFinished()
     {
-        SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
         return Timer.getFPGATimestamp() - startTime >= time;
     }
 
@@ -48,8 +47,6 @@ public class RampDownArc extends CommandBase
     {
         RobotContainer.getDriveTrain().stop();
         DriveTrain.arcadeSpeedHigh = Constants.SLALOM_SPEED;
-        SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
-
     }
 
 
