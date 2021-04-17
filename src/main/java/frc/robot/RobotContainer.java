@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.commands.MotionProfile;
+import frc.robot.commands.MoveDistance;
 import frc.robot.commands.MoveStraight;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -114,7 +115,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return motionProfile;
+    MoveDistance moveDistance = new MoveDistance(5);
+    return moveDistance;
   }
 
   public static Joystick getJoystick() {return joy;}

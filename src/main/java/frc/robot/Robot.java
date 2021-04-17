@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MotionProfile;
 import frc.robot.commands.MoveDistance;
+import frc.robot.commands.MoveStraight;
 import frc.robot.commands.MoveStraightPID;
 import frc.robot.commands.PointTurn;
 import frc.robot.commands.Slalom;
@@ -109,9 +110,8 @@ public class Robot extends TimedRobot {
 
     // MoveStraightPID moveStraightPID = new MoveStraightPID();
 
-    Slalom slalom = new Slalom();
     
-    m_autonomousCommand = slalom;
+    m_autonomousCommand = new MoveStraightPID(1);
 
     if(m_autonomousCommand != null)
     {

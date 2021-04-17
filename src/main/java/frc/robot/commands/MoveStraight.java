@@ -53,7 +53,7 @@ public class MoveStraight extends CommandBase {
       maxTime = timediff;
     }
     System.out.println(RobotContainer.getDriveTrain().getAvgRate()+ ": "+ timediff);
-    driveTrain.tankDrive(1.0, 1.0);
+    driveTrain.tankDrive(-1, -1);
   }
 
   // Called once the command ends or is interrupted.

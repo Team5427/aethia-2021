@@ -72,6 +72,22 @@ public class DriveTrain extends SubsystemBase
         }
     }
 
+    public void rampDownLeft(double speed, double endSpeed)
+    {
+        int multiplier = (speed < 0)? 1: -1;
+        this.leftSpeed = speed;
+        left.set((-leftSpeed) * multiplier);
+
+        if(leftSpeed <= Math.abs(endSpeed))
+        {
+            
+        }
+        else
+        {
+            leftSpeed -= 0.0035;
+        }
+    }
+
     public void rampArcade(double speed, double rotation)
     {
         int multiplier = (speed < 0)? -1: 1;

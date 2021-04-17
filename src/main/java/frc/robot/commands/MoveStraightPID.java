@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
@@ -18,13 +19,14 @@ import frc.robot.subsystems.DriveTrain;
 public class MoveStraightPID extends PIDCommand {
   /** Creates a new MoveStraightPID. */
 
-  private double startTime;
-  private double time;
+  private double startDist;
+  private double distance;
+  private double tolerance;
 
-  public MoveStraightPID(double time) {
+  public MoveStraightPID(double distance) {
     super(
         // The controller that the command will use
-        new PIDController(0.16, 0.095, 0.005),
+        new PIDController(0.17, 0.095, 0.005),
         //0.155
         //0.095
         //0.005
@@ -35,19 +37,20 @@ public class MoveStraightPID extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          RobotContainer.getDriveTrain().rampLeft(-0.4);
+          RobotContainer.getDriveTrain().getLeft().set(-0.4);;
           RobotContainer.getDriveTrain().getRight().set(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.getDriveTrain());
     // Configure additional PID options by calling `getController` here.
-    this.time = time;
+    this.distance = distance;
   }
 
   @Override
   public void initialize()
   {
-    startTime = Timer.getFPGATimestamp();
+    tolerance = 0.05;
+    startDist = RobotContainer.getDriveTrain().getAvgDistance();
     RobotContainer.getAHRS().reset();
     super.initialize();
   }
@@ -56,8 +59,9 @@ public class MoveStraightPID extends PIDCommand {
   @Override
   public boolean isFinished() 
   {
+    System.out.println("Distance: " + distance + "   Start Distance: " + startDist + "   Avg Distance: " + RobotContainer.getDriveTrain().getAvgDistance());
     SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
-    return Timer.getFPGATimestamp() - startTime >= time;
+    return Math.abs(RobotContainer.getDriveTrain().getAvgDistance() - startDist) < distance + tolerance && Math.abs(RobotContainer.getDriveTrain().getAvgDistance() - startDist) > distance - tolerance;
   }
 
   @Override
