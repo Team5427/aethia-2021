@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -133,7 +134,7 @@ public class DriveTrain extends SubsystemBase
 
     public double getAvgDistance()
     {
-        return (RobotContainer.getEncLeft().getDistance() + RobotContainer.getEncRight().getDistance()) / 2;
+        return Units.metersToInches((RobotContainer.getEncLeft().getDistance() + RobotContainer.getEncRight().getDistance()) / 2);
     }
 
     public double getAvgRate()

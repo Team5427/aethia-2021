@@ -20,10 +20,10 @@ public class MoveStraightPID extends PIDCommand {
   /** Creates a new MoveStraightPID. */
 
   private double startDist;
-  private double distance;
+  private double distance;//in inches
   private double tolerance;
 
-  public MoveStraightPID(double distance) {
+  public MoveStraightPID(double distance, int direction) {
     super(
         // The controller that the command will use
         new PIDController(0.17, 0.095, 0.005),
@@ -37,19 +37,19 @@ public class MoveStraightPID extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          RobotContainer.getDriveTrain().getLeft().set(-0.4);;
-          RobotContainer.getDriveTrain().getRight().set(output);
+          RobotContainer.getDriveTrain().rampLeft(-0.6 * direction);
+          RobotContainer.getDriveTrain().getRight().set(output * direction);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.getDriveTrain());
     // Configure additional PID options by calling `getController` here.
-    this.distance = distance;
+    this.distance = Math.abs(distance);
   }
 
   @Override
   public void initialize()
   {
-    tolerance = 0.05;
+    tolerance = 2;
     startDist = RobotContainer.getDriveTrain().getAvgDistance();
     RobotContainer.getAHRS().reset();
     super.initialize();
@@ -70,6 +70,7 @@ public class MoveStraightPID extends PIDCommand {
     RobotContainer.getDriveTrain().stop();
     DriveTrain.leftSpeed = 0;
     DriveTrain.rightSpeed = 0;
+    SmartDashboard.putNumber("dist", RobotContainer.getDriveTrain().getAvgDistance());
     SmartDashboard.putNumber("Yaw", RobotContainer.getAHRS().getYaw());
   }
 }

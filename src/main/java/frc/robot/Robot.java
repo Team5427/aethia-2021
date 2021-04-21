@@ -21,6 +21,7 @@ import frc.robot.commands.MoveDistance;
 import frc.robot.commands.MoveStraight;
 import frc.robot.commands.MoveStraightPID;
 import frc.robot.commands.PointTurn;
+import frc.robot.commands.RightAuton;
 import frc.robot.commands.Slalom;
 import frc.robot.subsystems.DriveTrain;
 
@@ -68,7 +69,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Encoder Right", m_robotContainer.getEncRight().getDistance());
     // SmartDashboard.putNumber("Average distance", m_robotContainer.getDriveTrain().getAvgDistance());
     SmartDashboard.putNumber("Distance", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
-    SmartDashboard.putNumber("dist", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
+    // SmartDashboard.putNumber("dist", Units.metersToInches(RobotContainer.getDriveTrain().getAvgDistance()));
 
 
 
@@ -111,7 +112,7 @@ public class Robot extends TimedRobot {
     // MoveStraightPID moveStraightPID = new MoveStraightPID();
 
     
-    m_autonomousCommand = new MoveStraightPID(1);
+    m_autonomousCommand = new RightAuton();
 
     if(m_autonomousCommand != null)
     {
